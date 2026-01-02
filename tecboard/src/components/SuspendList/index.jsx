@@ -1,9 +1,16 @@
 import styles from "./SuspendList.module.css";
 
-function SuspendList() {
+function SuspendList({ itens, ...rest }) {
   return (
-    <select name="" id="" className={styles.suspendList}>
-      <option value=""></option>
+    <select {...rest} className={styles.suspendList} defaultValue="">
+      <option value="" disabled>
+        Selecione uma opção
+      </option>
+      {itens.map((item) => (
+        <option key={item.id} value={item.id}>
+          {item.name}
+        </option>
+      ))}
     </select>
   );
 }
