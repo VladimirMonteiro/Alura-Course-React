@@ -1,7 +1,8 @@
+import { IconClose } from "../icons";
 import styles from "./Dialog.module.css";
 import { useEffect, useRef } from "react";
 
-const Dialog = ({ isOpen, onClose }) => {
+const Dialog = ({ isOpen, onClose, children }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -17,12 +18,13 @@ const Dialog = ({ isOpen, onClose }) => {
   };
   return (
     <>
-      <dialog ref={dialogRef}>
-        <button autoFocus onClick={onClose}>
-          {" "}
-          Close{" "}
-        </button>
-        <p>Modal content</p>
+      <dialog ref={dialogRef} className={styles.dialog}>
+        <div className={styles.btnCloseWrapper}>
+          <button autoFocus onClick={onClose} className={styles.btnClose}>
+            <IconClose />
+          </button>
+        </div>
+        <div className={styles.body}>{children}</div>
       </dialog>
     </>
   );

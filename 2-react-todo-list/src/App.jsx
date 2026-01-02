@@ -7,6 +7,7 @@ import { Header } from "./components/Header";
 import { Heading } from "./components/Heading";
 import { IconPlus, IconSchool } from "./components/icons";
 import { SubHeading } from "./components/SubHeading";
+import TodoForm from "./components/TodoForm";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDoList } from "./components/ToDoList";
 
@@ -60,6 +61,11 @@ function App() {
     setShowDialog(!showDialog);
   };
 
+  const addTodo = () => {
+    console.log("Adicionando todo...");
+    toggleDialog();
+  };
+
   return (
     <main>
       <Container>
@@ -82,7 +88,9 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <Dialog isOpen={showDialog} onClose={toggleDialog} />
+            <Dialog isOpen={showDialog} onClose={toggleDialog}>
+              <TodoForm onSubmit={addTodo} />
+            </Dialog>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
