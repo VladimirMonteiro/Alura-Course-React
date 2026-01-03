@@ -1,22 +1,17 @@
 import TodoContext from "./TodoContext";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function TodoProvider({ children }) {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Props, state e hooks",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-  ]);
+  const TODOS = "todos";
+
+  const storedTodos = JSON.parse(localStorage.getItem(TODOS));
+
+  const [todos, setTodos] = useState(storedTodos || []);
+
+  useEffect(() => {
+    localStorage.setItem(TODOS, JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (formData) => {
     const description = formData.get("description");
